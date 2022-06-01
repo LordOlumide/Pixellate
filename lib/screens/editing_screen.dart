@@ -15,7 +15,11 @@ class EditingScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-
+        margin: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+        ),
       ),
     );
   }

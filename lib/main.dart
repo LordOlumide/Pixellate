@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pixellate/screens/intro_screen.dart';
 import 'package:pixellate/screens/editing_screen.dart';
+import 'package:pixellate/screens/choose_picture_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         IntroScreen.screen_id: (context) => IntroScreen(),
         EditingScreen.screen_id: (context) => EditingScreen(),
+        ChooseScreen.screen_id: (context) => ChooseScreen(),
       },
     );
   }

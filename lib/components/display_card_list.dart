@@ -41,16 +41,17 @@ class DisplayCardsList {
 }
 
 /// Opens the file picker to get a single image and returns the File object
-Future<File?> getNewImageFile() async {
-  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-  if (image != null) {
-    return File(image.path);
+Future<List<File>?> getNewImageFiles() async {
+  List<XFile>? images = [];
+  images = await _picker.pickMultiImage();
+  if (images != []) {
+    return [for (XFile image in images!) File(image.path)];
   }
   return null;
 }
 
 /// Returns the image in a DisplayCard if it exists
-DisplayCard fileToImage(imageFile) {
+DisplayCard fileToDisplayCard(imageFile) {
   return DisplayCard(
     picture: Image.file(imageFile),
   );

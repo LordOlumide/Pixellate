@@ -54,12 +54,14 @@ class _ChooseScreenState extends State<ChooseScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-              File? imageFile = await getNewImageFile();
-              if (imageFile != null) {
-                DisplayCard newPicture = fileToImage(imageFile);
-                imageCardListObject.addPicture(newPicture);
-                updateCurrentPictureSet();
+              List<File>? imageFiles = await getNewImageFiles();
+              if (imageFiles != null) {
+                for (File imageFile in imageFiles) {
+                  DisplayCard newPicture = fileToDisplayCard(imageFile);
+                  imageCardListObject.addPicture(newPicture);
+                }
               }
+              updateCurrentPictureSet();
             },
             icon: Icon(Icons.add_a_photo),
           ),

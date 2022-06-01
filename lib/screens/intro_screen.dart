@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pixellate/screens/choose_picture_screen.dart';
+import 'package:pixellate/screens/editing_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   static const screen_id = 'intro_screen';
@@ -34,7 +34,7 @@ class IntroScreen extends StatelessWidget {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, ChooseScreen.screen_id);
+                  Navigator.pushNamed(context, EditingScreen.screen_id);
                 },
                 style: ButtonStyle(
                   backgroundColor:

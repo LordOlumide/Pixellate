@@ -1,64 +1,16 @@
-import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:pixellate/components/image_display_card.dart';
-import 'package:image_picker/image_picker.dart';
-
-final ImagePicker _picker = ImagePicker();
-
-List<Image> listOfInitialImages = const [
-  Image(image: AssetImage('images/testing_stock/stickFigureMale.png')),
-  Image(image: AssetImage('images/testing_stock/stickFigureFemale.png')),
-  Image(image: AssetImage('images/testing_stock/gown.png')),
-  Image(image: AssetImage('images/testing_stock/hat1.png')),
-  Image(image: AssetImage('images/testing_stock/hat2.png')),
-  Image(image: AssetImage('images/testing_stock/shirt1.png')),
-  Image(image: AssetImage('images/testing_stock/trouser.png')),
-  Image(image: AssetImage('images/testing_stock/blueBackground.png')),
-];
-
 
 /// The object that contains and manages the displayList.
 class DisplayCardsList {
 
-  DisplayCardsList({});
-
-  final List<DisplayCard> _displayList = [];
-
-  // initialize it to contain all the images from listOfInitialImages
-  initialize() {
-    for (int i = 0; i < listOfInitialImages.length; i++) {
-      _displayList.add(DisplayCard(
-        picture: listOfInitialImages[i],
-        onCardSelected: () {},
-      ));
-    }
-  }
-
-  // returns a copy of _displayList
-  List<DisplayCard> get displayList {
-    return _displayList;
-  }
+  final List<DisplayCard> baseDisplayList = [];
 
   // adds a new picture
   void addPicture(DisplayCard newPicture) {
-    _displayList.add(newPicture);
+    baseDisplayList.add(newPicture);
   }
 
-  /// Returns the given image file in a DisplayCard
-  DisplayCard fileToDisplayCard(imageFile) {
-    return DisplayCard(
-      picture: Image.file(imageFile),
-      onCardSelected: () {} //TODO:,
-    );
-  }
-}
-
-/// Opens the file picker to get a single image and returns the File object
-Future<List<File>?> getNewImageFiles() async {
-  List<XFile>? images = [];
-  images = await _picker.pickMultiImage();
-  if (images != []) {
-    return [for (XFile image in images!) File(image.path)];
-  }
-  return null;
+  // toggleCardState(int index) {
+  //   baseDisplayList[index].selectOrUnselect();
+  // }
 }

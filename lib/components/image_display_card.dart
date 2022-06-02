@@ -13,6 +13,10 @@ class DisplayCard extends StatelessWidget {
         image: AssetImage('images/testing_stock/stickFigureMale.png')),
   });
 
+  selectOrUnselect(bool choice) {
+    isSelected = choice;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

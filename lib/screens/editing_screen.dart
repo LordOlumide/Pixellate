@@ -17,11 +17,13 @@ class EditingScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            margin: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.all(15.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+              ),
             ),
           ),
           TextButton(

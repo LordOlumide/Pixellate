@@ -12,26 +12,33 @@ class ChooseScreen extends StatefulWidget {
 }
 
 class _ChooseScreenState extends State<ChooseScreen> {
+
   // The List of image cards is in the DisplayCardsList()._displayList. There is
   //  a getter to return a copy and a function (addPicture) to add new pictures.
-  DisplayCardsList imageCardListObject = DisplayCardsList();
+  late DisplayCardsList imageCardListObject;
 
   // picture set to be displayed
   List<DisplayCard> currentPictureSet = [];
 
+  // function to refresh the currentPictureSet
   void updateCurrentPictureSet() {
     setState(() {
       currentPictureSet = imageCardListObject.displayList;
     });
   }
 
+  // This is the function that should run when a card is selected. It should
+  // set the chosenCard var to the list index of the selected
+  // card in imageCardListObject.displayList
+  onCardSelected() {
+
+  }
+
   // I suspect permission checking is not necessary.
   checkStoragePermission() async {
     PermissionStatus permissionStatus = await Permission.storage.status;
-    if (await Permission.storage.request().isGranted) {
-      setState(() {
-        permissionStatus = PermissionStatus.granted;
-      });
+    if (permissionStatus != PermissionStatus.granted) {
+      await Permission.storage.request().isGranted;
     }
   }
 
@@ -40,6 +47,7 @@ class _ChooseScreenState extends State<ChooseScreen> {
     super.initState();
     checkStoragePermission();
 
+    imageCardListObject = DisplayCardsList();
     imageCardListObject.initialize();
     updateCurrentPictureSet();
   }
@@ -57,7 +65,8 @@ class _ChooseScreenState extends State<ChooseScreen> {
               List<File>? imageFiles = await getNewImageFiles();
               if (imageFiles != null) {
                 for (File imageFile in imageFiles) {
-                  DisplayCard newPicture = fileToDisplayCard(imageFile);
+                  DisplayCard newPicture =
+                      imageCardListObject.fileToDisplayCard(imageFile);
                   imageCardListObject.addPicture(newPicture);
                 }
               }
@@ -90,4 +99,3 @@ class _ChooseScreenState extends State<ChooseScreen> {
     );
   }
 }
-

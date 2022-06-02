@@ -16,15 +16,20 @@ List<Image> listOfInitialImages = const [
   Image(image: AssetImage('images/testing_stock/blueBackground.png')),
 ];
 
+
 /// The object that contains and manages the displayList.
 class DisplayCardsList {
+
+  DisplayCardsList({});
+
   final List<DisplayCard> _displayList = [];
 
   // initialize it to contain all the images from listOfInitialImages
   initialize() {
-    for (Image image in listOfInitialImages) {
+    for (int i = 0; i < listOfInitialImages.length; i++) {
       _displayList.add(DisplayCard(
-        picture: image,
+        picture: listOfInitialImages[i],
+        onCardSelected: () {},
       ));
     }
   }
@@ -38,6 +43,14 @@ class DisplayCardsList {
   void addPicture(DisplayCard newPicture) {
     _displayList.add(newPicture);
   }
+
+  /// Returns the given image file in a DisplayCard
+  DisplayCard fileToDisplayCard(imageFile) {
+    return DisplayCard(
+      picture: Image.file(imageFile),
+      onCardSelected: () {} //TODO:,
+    );
+  }
 }
 
 /// Opens the file picker to get a single image and returns the File object
@@ -48,11 +61,4 @@ Future<List<File>?> getNewImageFiles() async {
     return [for (XFile image in images!) File(image.path)];
   }
   return null;
-}
-
-/// Returns the image in a DisplayCard if it exists
-DisplayCard fileToDisplayCard(imageFile) {
-  return DisplayCard(
-    picture: Image.file(imageFile),
-  );
 }

@@ -32,7 +32,7 @@ class _ChooseScreenState extends State<ChooseScreen> {
   }
 
   // initialize it to contain all the images from listOfInitialImages
-  initializeImageCardListObject() {
+  initializeBaseDisplayList() {
     for (int i = 0; i < listOfInitialImages.length; i++) {
       addPicture(DisplayCard(
         picture: listOfInitialImages[i],
@@ -78,7 +78,7 @@ class _ChooseScreenState extends State<ChooseScreen> {
     super.initState();
     checkForStoragePermission();
 
-    initializeImageCardListObject();
+    initializeBaseDisplayList();
   }
 
   @override

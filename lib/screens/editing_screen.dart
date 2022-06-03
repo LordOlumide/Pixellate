@@ -31,7 +31,10 @@ class EditingScreen extends StatelessWidget {
               'Choose pictures'
             ),
             onPressed: () {
-              Navigator.pushNamed(context, ChooseScreen.screen_id);
+              Navigator.pushNamed(
+                  context,
+                  ChooseScreen.screen_id
+              );
             },
           ),
         ],

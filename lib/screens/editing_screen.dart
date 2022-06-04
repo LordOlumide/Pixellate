@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pixellate/screens/choose_picture_screen.dart';
-import 'package:provider/provider.dart';
 
-class EditingScreen extends StatelessWidget {
+class EditingScreen extends StatefulWidget {
   static const screen_id = 'editing_screen';
 
-  const EditingScreen({Key? key}) : super(key: key);
+  EditingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<EditingScreen> createState() => _EditingScreenState();
+}
+
+class _EditingScreenState extends State<EditingScreen> {
+  Image? onlyImage;
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +27,38 @@ class EditingScreen extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.all(15.0),
               decoration: BoxDecoration(
+                image: onlyImage != null
+                    ? DecorationImage(image: onlyImage!.image)
+                    : DecorationImage(
+                        image: AssetImage('images/pixxelate.png')),
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
               ),
             ),
           ),
-          TextButton(
-            child: Text(
-              'Choose pictures'
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: TextButton(
+              child: Text(
+                'Choose picture',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+              ),
+              onPressed: () async {
+                dynamic stuff =
+                    await Navigator.pushNamed(context, ChooseScreen.screen_id);
+                if (stuff != null) {
+                  setState(() {
+                    onlyImage = stuff;
+                  });
+                }
+              },
             ),
-            onPressed: () {
-              Navigator.pushNamed(
-                  context,
-                  ChooseScreen.screen_id
-              );
-            },
           ),
         ],
       ),

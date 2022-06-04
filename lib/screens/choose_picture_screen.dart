@@ -4,8 +4,6 @@ import 'dart:io';
 import 'package:pixellate/functionality/file_getter.dart';
 import 'package:pixellate/components/image_display_card.dart';
 import 'package:pixellate/functionality/permissions.dart';
-import 'package:pixellate/constants.dart';
-import 'package:provider/provider.dart';
 import 'package:pixellate/components/image_state_lists.dart';
 
 class ChooseScreen extends StatefulWidget {
@@ -60,7 +58,7 @@ class _ChooseScreenState extends State<ChooseScreen> {
           IconButton(
             icon: Icon(Icons.forward),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(context, currentlySelectedImage);
             },
           ),
         ],

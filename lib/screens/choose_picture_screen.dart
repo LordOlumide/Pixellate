@@ -6,8 +6,7 @@ import 'package:pixellate/components/image_display_card.dart';
 import 'package:pixellate/functionality/permissions.dart';
 import 'package:pixellate/constants.dart';
 import 'package:provider/provider.dart';
-import 'package:pixellate/components/image_card_list.dart';
-import 'package:pixellate/components/selected_card.dart';
+import 'package:pixellate/components/image_state_lists.dart';
 
 class ChooseScreen extends StatefulWidget {
   static const screen_id = 'choose_screen';
@@ -17,37 +16,27 @@ class ChooseScreen extends StatefulWidget {
 }
 
 class _ChooseScreenState extends State<ChooseScreen> {
-  // The List of image cards
-  final List<Image> baseImageList = [];
-  // List of image card states
-  final List<bool> baseStatesList = [];
 
-  // initialize it to contain all the images from listOfInitialImages
-  initializeBaseDisplayList() {
-    for (int i = 0; i < listOfInitialImages.length; i++) {
-      addPicture(listOfInitialImages[i]);
-    }
-  }
+  // object to control the image list and state list
+  ImageStateList imageStateObject = ImageStateList();
 
-  // var to keep track of the number of imagCards in baseDisplayList
-  int displayListCounter = 0;
-
-  // adds a new picture
-  void addPicture(Image newPicture) {
-    baseImageList.add(newPicture);
-    baseStatesList.add(false);
-  }
+  // var to keep track of the currently selected image
+  Image? currentlySelectedImage;
 
   @override
   void initState() {
     super.initState();
     checkForStoragePermission();
 
-    initializeBaseDisplayList();
+    imageStateObject.initializeBaseDisplayList();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Assign these for easier access in the build method.
+    List<Image> baseImageList = imageStateObject.baseImageList;
+    List<bool> baseStatesList = imageStateObject.baseStatesList;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -55,56 +44,55 @@ class _ChooseScreenState extends State<ChooseScreen> {
         title: Text('Choose picture'),
         actions: [
           IconButton(
+            icon: Icon(Icons.add_a_photo),
             onPressed: () async {
               List<File>? imageFiles = await getNewImageFiles();
               if (imageFiles != null) {
                 for (File imageFile in imageFiles) {
                   Image newPicture = Image.file(imageFile);
                   setState(() {
-                    addPicture(newPicture);
+                    imageStateObject.addPicture(newPicture);
                   });
                 }
               }
             },
-            icon: Icon(Icons.add_a_photo),
           ),
           IconButton(
+            icon: Icon(Icons.forward),
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.forward),
           ),
         ],
       ),
       body: OrientationBuilder(builder: (context, orientation) {
-        return Consumer<SelectedImage>(builder: (context, card, child) {
-          // The currently selected card
-          SelectedImage currentSelectedCard = card;
+        /// Changes the currentlySelectedImage and the color of
+        /// the chosen card by setting all values in the baseStatesList
+        /// to false, then assigning only the chosen one to true.
+        setToSelectedImage(int index) {
+          currentlySelectedImage = baseImageList[index];
+          setState(() {
+            baseStatesList.setAll(
+                0, [for (int i = 0; i < baseStatesList.length; i++) false]);
+            baseStatesList[index] = true;
+          });
+        }
 
-          setToSelectedImage(int index) {
-            setState(() {
-              baseStatesList.setAll(0,
-                  [for (int i = 0; i < baseStatesList.length; i++) false]);
-              baseStatesList[index] = true;
-            });
-          }
-
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-            ),
-            itemCount: baseImageList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return DisplayCard(
-                picture: baseImageList[index],
-                isSelected: baseStatesList[index],
-                onCardTapped: () {
-                  setToSelectedImage(index);
-                },
-              );
-            },
-          );
-        });
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+          ),
+          itemCount: baseImageList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return DisplayCard(
+              picture: baseImageList[index],
+              isSelected: baseStatesList[index],
+              onCardTapped: () {
+                setToSelectedImage(index);
+              },
+            );
+          },
+        );
       }),
     );
   }

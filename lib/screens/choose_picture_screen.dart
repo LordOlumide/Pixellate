@@ -82,9 +82,11 @@ class _ChooseScreenState extends State<ChooseScreen> {
           SelectedImage currentSelectedCard = card;
 
           setToSelectedImage(int index) {
-            baseStatesList.setAll(0,
-                [for (int i = 0; i < baseStatesList.length; i++) false]);
-            baseStatesList[index] = true;
+            setState(() {
+              baseStatesList.setAll(0,
+                  [for (int i = 0; i < baseStatesList.length; i++) false]);
+              baseStatesList[index] = true;
+            });
           }
 
           return GridView.builder(

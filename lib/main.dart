@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
         EditingScreen.screen_id: (context) => EditingScreen(),
         ChooseScreen.screen_id: (context) {
 
-          SelectedCard currentSelectedCard = SelectedCard();
+          SelectedImage currentSelectedCard = SelectedImage();
 
-          return ChangeNotifierProvider<SelectedCard>(
+          return ChangeNotifierProvider<SelectedImage>(
             create: (context) => currentSelectedCard,
-            child: ChooseScreen(currentSelectedCard),
+            child: ChooseScreen(),
           );
         },
       },

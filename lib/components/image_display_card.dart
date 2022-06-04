@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class DisplayCard extends StatelessWidget {
   final Image picture;
-  final onCardSelected;
+  final onCardTapped;
   bool isSelected;
 
   // TODO: Implement color change on selected picture
   DisplayCard({
     this.isSelected = false,
-    this.onCardSelected,
+    this.onCardTapped,
     this.picture = const Image(
         image: AssetImage('images/testing_stock/stickFigureMale.png')),
   });
@@ -20,7 +20,7 @@ class DisplayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onCardSelected,
+      onTap: onCardTapped,
       child: Container(
         height: 200,
         margin: const EdgeInsets.all(5),

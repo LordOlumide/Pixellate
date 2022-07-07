@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pixellate/screens/choose_picture_screen.dart';
+import 'package:pixellate/screens/choose_screen/choose_picture_screen.dart';
 // import 'package:image/image.dart';
 
 class EditingScreen extends StatefulWidget {

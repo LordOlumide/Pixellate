@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pixellate/screens/editing_screen.dart';
+import 'package:pixellate/screens/editing_screen/editing_screen.dart';
 
 class LoadingScreen extends StatelessWidget {
   static const screen_id = 'intro_screen';

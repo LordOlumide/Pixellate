@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pixellate/screens/loading_screen.dart';
-import 'package:pixellate/screens/editing_screen.dart';
-import 'package:pixellate/screens/choose_picture_screen.dart';
+import 'package:pixellate/screens/editing_screen/editing_screen.dart';
+import 'package:pixellate/screens/choose_screen/choose_picture_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {

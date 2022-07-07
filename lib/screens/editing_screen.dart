@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pixellate/screens/choose_picture_screen.dart';
-import 'package:image/image.dart';
+// import 'package:image/image.dart';
 
 class EditingScreen extends StatefulWidget {
   static const screen_id = 'editing_screen';
@@ -17,7 +17,7 @@ class _EditingScreenState extends State<EditingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF8e8e8e),
+      backgroundColor: Colors.black26,
       appBar: AppBar(
         backgroundColor: Colors.purple,
         title: Text('Pixellate'),
@@ -26,7 +26,7 @@ class _EditingScreenState extends State<EditingScreen> {
         children: [
           Expanded(
             child: Container(
-              margin: EdgeInsets.all(15.0),
+              margin: EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 image: onlyImage != null
                     ? DecorationImage(image: onlyImage!.image)
@@ -39,7 +39,7 @@ class _EditingScreenState extends State<EditingScreen> {
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
-            child: TextButton(
+            child: MaterialButton(
               child: Text(
                 'Choose picture',
                 style: TextStyle(
@@ -47,9 +47,7 @@ class _EditingScreenState extends State<EditingScreen> {
                   color: Colors.white,
                 ),
               ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-              ),
+              color: Colors.purple,
               onPressed: () async {
                 dynamic stuff =
                     await Navigator.pushNamed(context, ChooseScreen.screen_id);

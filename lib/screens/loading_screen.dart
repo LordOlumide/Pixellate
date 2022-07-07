@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:pixellate/screens/editing_screen.dart';
 
-class IntroScreen extends StatelessWidget {
+class LoadingScreen extends StatelessWidget {
   static const screen_id = 'intro_screen';
 
-  const IntroScreen({Key? key}) : super(key: key);
+  const LoadingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1e80ff),
+      backgroundColor: Colors.black12,
       body: Container(
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('images/pixxelate.png'),
             fit: BoxFit.contain,
           ),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 30),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -26,8 +26,8 @@ class IntroScreen extends StatelessWidget {
                 'Welcome',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 50,
-                  color: Colors.black,
+                  fontSize: 44,
+                  color: Colors.black87,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -38,7 +38,7 @@ class IntroScreen extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xFF47006b)),
+                    MaterialStateProperty.all<Color>(const Color(0xFF47006b)),
                 ),
                 child: const Text(
                     'Edit a new picture'

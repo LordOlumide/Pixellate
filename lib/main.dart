@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pixellate/screens/intro_screen.dart';
+import 'package:pixellate/screens/loading_screen.dart';
 import 'package:pixellate/screens/editing_screen.dart';
 import 'package:pixellate/screens/choose_picture_screen.dart';
 import 'package:provider/provider.dart';
@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pixellate',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      initialRoute: IntroScreen.screen_id,
+      initialRoute: LoadingScreen.screen_id,
       routes: {
-        IntroScreen.screen_id: (context) => IntroScreen(),
+        LoadingScreen.screen_id: (context) => LoadingScreen(),
         EditingScreen.screen_id: (context) => EditingScreen(),
         ChooseScreen.screen_id: (context) => ChooseScreen(),
       },

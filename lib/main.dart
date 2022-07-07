@@ -5,11 +5,11 @@ import 'package:pixellate/screens/choose_picture_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // MyApp({});
 
   // Note: Everything here is configured only for android.
   @override

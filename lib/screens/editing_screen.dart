@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pixellate/screens/choose_picture_screen.dart';
+import 'package:image/image.dart';
 
 class EditingScreen extends StatefulWidget {
   static const screen_id = 'editing_screen';
